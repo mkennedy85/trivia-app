@@ -27,10 +27,10 @@ class Question(db.Model):
   __tablename__ = 'questions'
 
   id = Column(Integer, primary_key=True)
-  question = Column(String)
-  answer = Column(String)
+  question = Column(String, nullable=False)
+  answer = Column(String, nullable=False)
   category = Column(String)
-  difficulty = Column(Integer)
+  difficulty = Column(Integer, nullable=False)
 
   def __init__(self, question, answer, category, difficulty):
     self.question = question

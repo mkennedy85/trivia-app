@@ -131,13 +131,20 @@ def create_app(test_config=None):
   '''
   @app.route('/questions/add', methods=['POST'])
   def add_question():
-    question = Question(question=request.get_json()['question'],answer=request.get_json()['answer'],category=request.get_json()['category'],difficulty=request.get_json()['difficulty'])
-    question.insert
+    data = {
+      'question': request.get_json()['question'],
+      'answer': request.get_json()['answer'],
+      'category': request.get_json()['category'],
+      'difficulty': request.get_json()['difficulty']
+    }
+
+    question = Question(**data)
+    question.insert()
     
     result = {
       'success': True,
     }
-    
+
     return jsonify(result)
 
   '''
@@ -239,5 +246,20 @@ def create_app(test_config=None):
   Create error handlers for all expected errors 
   including 404 and 422. 
   '''
+  @app.errorhandler(404)
+  def not_found(error):
+    return jsonify({
+      'success': False,
+      'error': 404,
+      'message': 'Not Found'
+    })
+
+  @app.errorhandler(422)
+  def unprocessable_entity(error):
+    return jsonify({
+      'success': False,
+      'error': 422,
+      'message': 'Unprocessable Entity'
+    })
   
   return app
