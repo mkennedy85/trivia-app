@@ -135,9 +135,10 @@ The application expects a header of `Content-Type: application/json`
 
 #### GET /categories
 
-- General:
-    - Returns a list of categories and their associated ID.
-- Sample: `curl http://127.0.0.1:5000/categories`
+*General:*
+  - Returns a list of categories and their associated ID.
+*Sample:* `curl http://127.0.0.1:5000/categories`
+*Response:*
 ```bash
 {
   "categories": {
@@ -154,12 +155,13 @@ The application expects a header of `Content-Type: application/json`
 
 #### GET /questions
 
-- General:
-    - Returns a list of questions.
-    - Paginated with each page containing 10 results. Defaults to page 1 with other pages being returned by passing a page argument.
-- Sample:
+*General:*
+  - Returns a list of questions.
+  - Paginated with each page containing 10 results. Defaults to page 1 with other pages being returned by passing a page argument.
+*Sample:*
     `curl http://127.0.0.1:5000/questions`
     `curl http://127.0.0.1:5000/questions?page=2`
+*Response:*
 ```bash
 {
   "categories": {
@@ -244,9 +246,10 @@ The application expects a header of `Content-Type: application/json`
 
 #### DELETE /questions/$id
 
-- General:
-    - Deletes a question by ID.
-- Sample: `curl -X DELETE http://127.0.0.1:5000/questions/2`
+*General:*
+  - Deletes a question by ID.
+*Sample:* `curl -X DELETE http://127.0.0.1:5000/questions/2`
+*Response:*
 ```bash
 {
   "message": "Question ID 2 has been deleted",
@@ -256,13 +259,13 @@ The application expects a header of `Content-Type: application/json`
 
 #### POST /questions/add
 
-- General:
+*General:*
     - Adds a question with the data from the JSON payload.
-- Sample: 
+*Sample:* 
 ```bash
 curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions/add
 ```
-- Body:
+*Body:*
 ```bash
 {
 	"question": "What is my name?",
@@ -271,7 +274,7 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 	"difficulty": 1
 }
 ```
-- Response:
+*Response:*
 ```bash
 {
   "success": true
@@ -280,19 +283,19 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 
 #### POST /questions
 
-- General:
-    - Searches questions using a case-insensitive fuzzy matching.
-- Sample: 
+*General:*
+  - Searches questions using a case-insensitive fuzzy matching.
+*Sample:* 
 ```bash
 curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 ```
-- Body:
+*Body:*
 ```bash
 {
     "searchTerm": "name"
 }
 ```
-- Response:
+*Response:*
 ```bash
 {
   "categories": {
@@ -327,12 +330,13 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 
 #### GET /categories/$category_id/questions
 
-- General:
-    - Returns a list of questions.
-    - Paginated with each page containing 10 results. Defaults to page 1 with other pages being returned by passing a page argument.
-- Sample:
+*General:*
+  - Returns a list of questions.
+  - Paginated with each page containing 10 results. Defaults to page 1 with other pages being returned by passing a page argument.
+*Sample:*
     `curl http://127.0.0.1:5000/categories/2/questions`
     `curl http://127.0.0.1:5000/categories/2/questions?page=2`
+*Response:*
 ```bash
 {
   "categories": {
@@ -382,16 +386,16 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 
 #### POST /quizzes
 
-- General:
-    - Requests questions to populate a quiz with up to 5 questions.
-    - Defaults to questions randomly selected from all categories.
-    - If `quiz_category` is provided then the results will come from that category only.
-    - Expects that an array of previous questions be provided so that questions are not repeated.
-- Sample: 
+*General:*
+  - Requests questions to populate a quiz with up to 5 questions.
+  - Defaults to questions randomly selected from all categories.
+  - If `quiz_category` is provided then the results will come from that category only.
+  - An array of previous questions can be provided so that questions are not repeated.
+*Sample:* 
 ```bash
 curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 ```
-- Body:
+*Body:*
 ```bash
 {
   "quiz_category": {
@@ -400,7 +404,7 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
   "previous_questions": [20,21]
 }
 ```
-- Response:
+*Response:*
 ```bash
 {
   "question": {
