@@ -95,6 +95,10 @@ def create_app(test_config=None):
       'difficulty': request.get_json()['difficulty']
     }
 
+    check_for_duplicate = Question.query.filter(Question.question == data['question']).all()
+    if len(check_for_duplicate) > 0:
+      abort(422)
+
     question = Question(**data)
     question.insert()
     
@@ -137,6 +141,7 @@ def create_app(test_config=None):
       'questions': current_questions,
       'total_questions': len(selection),
       'categories': categories,
+      'current_category': category_id,
       'page': request.args.get('page', 1, type=int)
     }
 
@@ -168,13 +173,21 @@ def create_app(test_config=None):
 
     return jsonify(result)
 
+  @app.errorhandler(400)
+  def bad_request(error):
+    return jsonify({
+      'success': False,
+      'error': 400,
+      'message': 'Bad Request'
+    }), 400
+
   @app.errorhandler(404)
   def not_found(error):
     return jsonify({
       'success': False,
       'error': 404,
       'message': 'Not Found'
-    })
+    }), 404
 
   @app.errorhandler(405)
   def method_not_allowed(error):
@@ -182,7 +195,7 @@ def create_app(test_config=None):
       'success': False,
       'error': 405,
       'message': 'Method Not Allowed'
-    })
+    }), 405
 
   @app.errorhandler(422)
   def unprocessable_entity(error):
@@ -190,6 +203,6 @@ def create_app(test_config=None):
       'success': False,
       'error': 422,
       'message': 'Unprocessable Entity'
-    })
+    }), 422
   
   return app
