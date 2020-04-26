@@ -72,7 +72,7 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 The `./frontend` directory contains a complete React frontend to consume the data from the Flask server.
 
-> _tip_: this frontend is designed to work with [Flask-based Backend](../backend). It is recommended you stand up the backend first, test using Postman or curl, update the endpoints in the frontend, and then the frontend should integrate smoothly.
+> _tip_: This frontend is designed to work with [Flask-based Backend](../backend). It is recommended you stand up the backend first, test using Postman or curl, update the endpoints in the frontend, and then the frontend should integrate smoothly.
 
 #### Running Your Frontend in Dev Mode
 
@@ -131,7 +131,7 @@ The errors that will be returned are:
 
 The application expects a header of `Content-Type: application/json`
 
-### Responses
+### Endpoints
 
 #### GET /categories
 
@@ -271,6 +271,7 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
 	"difficulty": 1
 }
 ```
+- Response:
 ```bash
 {
   "success": true
@@ -291,6 +292,7 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
     "searchTerm": "name"
 }
 ```
+- Response:
 ```bash
 {
   "categories": {
@@ -398,6 +400,7 @@ curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/questions
   "previous_questions": [20,21]
 }
 ```
+- Response:
 ```bash
 {
   "question": {
